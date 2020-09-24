@@ -25,8 +25,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         scanBarcode.setOnClickListener {
-            //IntentIntegrator(this).initiateScan()
+            IntentIntegrator(this).initiateScan()
+        }
 
+        scanBarcodeCustom.setOnClickListener {
             val integrator = IntentIntegrator(this)
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 특정 규격의 바코드만 지원
             integrator.setPrompt("QR 코드를 스캔하여 주세요") // 카메라 프리뷰 하단에 표시되는 문구
@@ -34,6 +36,13 @@ class MainActivity : AppCompatActivity() {
             integrator.setBeepEnabled(true) // 바코드 인식할 때 비프음 여부
             integrator.setBarcodeImageEnabled(true) // 인식한 바코드 사진을 저장하고 경로를 반환
             integrator.setOrientationLocked(false) // orientation이 fullSensor일 때 orientation 변경을 허용할지 여부
+            integrator.initiateScan()
+        }
+
+        scanBarcodeCustomActivity.setOnClickListener {
+            val integrator = IntentIntegrator(this)
+            integrator.setBarcodeImageEnabled(true) // 인식한 바코드 사진을 저장하고 경로를 반환
+            integrator.captureActivity = CustomActivity::class.java
             integrator.initiateScan()
         }
     }
